@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Smooth Pitch Correction Map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <!-- Include Mapbox GL JS -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css' rel='stylesheet' />
+    
+    <!-- CSS Styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Apple-like, elegant, and minimal font */
+        }
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        #menu {
+            position: absolute;
+            bottom: 0;
+            left: 0; /* Stretch to full width */
+            right: 0; /* Stretch to full width */
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px 0; /* Adjust padding for visual appeal */
+            margin: 0; /* Full width stretch */
+            border-radius: 0; /* Full width, so no border radius needed at the bottom */
+            display: flex;
+            justify-content: center; /* Center the items horizontally */
+            flex-wrap: wrap; /* Wrap items if necessary */
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px; /* Increase padding for better touch targets */
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            flex: 1 1 auto; /* Allow flex items to grow and shrink as needed */
+        }
+        .menu-item:first-child {
+            border-top: none;
+        }
+        .menu-icon {
+            margin-right: 10px;
+        }
+        .menu-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-title, .menu-description {
+            color: #FFFFFF;
+        }
+        .menu-title {
+            font-weight: bold;
+        }
+        .menu-description {
+            font-size: 12px;
+            color: #CCCCCC;
+        }
+        #expanded-menu {
+            width: 100%; /* Full width */
+            display: none; /* Initially hidden */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px 0; /* Adjusted padding for visual appeal */
+            border-radius: 0; /* Adjusted for full-width layout */
+        }
+        #expandable-menu.expanded #expanded-menu {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id='map'></div>
+    <div id="menu">
+        <div id="expandable-menu">
+            <button id="expandable-menu-button">
+                <img src="https://github.com/brambleappmatus/resources/blob/main/menu.png?raw=true" alt="Menu" width="24px" height="24px">
+            </button>
+            <div id="expanded-menu">
+                <div class="menu-item">
+                    <img class="menu-icon" src="YOUR_ICON_URL" alt="Create Pin Icon" width="24" height="24">
+                    <div class="menu-text">
+                        <div class="menu-title">Create Pin</div>
+                        <div class="menu-description">Place a new pin on the map</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img class="menu-icon" src="YOUR_ICON_URL" alt="My Pins Icon" width="24" height="24">
+                    <div class="menu-text">
+                        <div class="menu-title">My Pins</div>
+                        <div class="menu-description">View my personal pins</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img class="menu-icon" src="YOUR_ICON_URL" alt="POIs Icon" width="24" height="24">
+                    <div class="menu-text">
+                        <div class="menu-title">POIs</div>
+                        <div class="menu-description">Discover points of interest</div>
+                    </div>
+                </div>
+                <button id="return-to-center">
+                    <img src="https://github.com/brambleappmatus/resources/blob/main/home.png?raw=true" alt="Return to Center" width="24px" height="24px">
+                </button>
+            </div>
+        </div>
+        <div id="compass">
+            <img src="https://github.com/brambleappmatus/resources/blob/main/compass.png?raw=true" alt="Compass" width="32px" height="32px">
+        </div>
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYnJhbWJsZTIyIiwiYSI6ImNsdDE2b283djExcHUya3BsdWs0OXFydzgifQ.r3GWm3olfdS8hRsntYWIzA';
+        const center = [18.000031, 48.870137];
+        const bounds = [[17.975, 48.855], [18.025, 48.885]];
+        var map = new mapboxgl.Map({
+            container: 'map',
+            center: center,
+            zoom: 16,
+            bearing: -90.37,
+            pitch: 54.53,
+            style: 'mapbox://styles/bramble22/clt5vn98s000901qs2fmqft7o',
+            minZoom: 15,
+            maxZoom: 17,
+            maxBounds: bounds
+        });
+        map.touchPitch.disable();
+
+        document.getElementById('return-to-center').onclick = function() {
+            this.classList.add('pressed');
+            map.flyTo({
+                center: center,
+                zoom: 16,
+                speed: 0.5,
+                curve: 1
+            });
+            setTimeout(() => {
+                this.classList.remove('pressed');
+            }, 200);
+        };
+
+        function updateCompass() {
+            var rotate = `rotate(${-map.getBearing()}deg)`;
+            document.getElementById('compass').style.transform = rotate;
+        }
+        map.on('rotate', updateCompass);
+        updateCompass();
+
+        document.getElementById('expandable-menu-button').onclick = function() {
+            var expandedMenu = document.getElementById('expandable-menu');
+            expandedMenu.classList.toggle('expanded');
+            this.classList.toggle('pressed');
+            setTimeout(() => {
+                this.classList.remove('pressed');
+            }, 200);
+        };
+
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.onclick = function() {
+                document.getElementById('expandable-menu').classList.remove('expanded');
+            };
+        });
+
+        map.once('load', function() {
+            document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
+            document.querySelector('.mapboxgl-ctrl-attrib').remove();
+        });
+    </script>
+</body>
+</html>
