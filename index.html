@@ -179,6 +179,20 @@
             document.body.style.overflow = 'auto'; // Allow scrolling
         });
 
+        // Add touch event listeners for mobile devices
+        document.getElementById('expandable-menu-button').addEventListener('touchstart', function() {
+            var expandedMenu = document.getElementById('expanded-menu');
+            expandedMenu.style.bottom = '0'; // Slide the menu into view
+            
+            // Smoothly transition overlay opacity
+            document.getElementById('overlay').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('overlay').style.opacity = '1';
+            }, 50);
+            
+            document.body.style.overflow = 'auto'; // Allow scrolling
+        });
+
         function collapseMenu() {
             var expandedMenu = document.getElementById('expanded-menu');
             expandedMenu.style.bottom = '-300px'; // Slide the menu out of view
