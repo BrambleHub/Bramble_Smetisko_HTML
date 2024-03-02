@@ -70,8 +70,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
         }
         #overlay {
             position: fixed; /* Fix overlay position */
@@ -159,9 +159,12 @@
         map.on('rotate', updateCompass);
 
         map.once('load', function() {
-            document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
-            document.querySelector('.mapboxgl-ctrl-attrib').remove();
-        });
+    document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
+    document.querySelector('.mapboxgl-ctrl-attrib').remove();
+    
+    // Set initial rotation of the compass
+    document.getElementById('compass').style.transform = `rotate(${map.getBearing() + 180}deg)`; // Add 180 degrees
+});
     </script>
 </body>
 </html>
