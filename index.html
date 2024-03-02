@@ -23,12 +23,16 @@
             position: absolute;
             bottom:55px;
             right: 30px; /* Adjust right position */
-            transform: translateX(50%); /* Center horizontally */
+            transform: translateX(50%) scale(1); /* Center horizontally and initial scale */
             cursor: pointer;
             background: none;
             border: none;
             padding: 0;
             z-index: 1;
+            transition: transform 0.3s; /* Smooth transition for scaling */
+        }
+        #expandable-menu-button:active {
+            transform: translateX(50%) scale(0.9); /* Scale down when pressed */
         }
         #expanded-menu {
             width: 100%;
@@ -52,8 +56,14 @@
             width: 100%; /* Ensure each item takes full width */
             box-sizing: border-box; /* Include padding in the element's total width and height */
             border-top: 1px solid rgba(255, 255, 255, 0.1); /* Less bright separating lines */
+            position: relative; /* Position for ripple effect */
+            overflow: hidden; /* Hide overflowing ripple */
+            transition: background-color 0.3s; /* Smooth transition for background color */
         }
         .menu-item:first-child { border-top: none; }
+        .menu-item:active {
+            background-color: rgba(255, 255, 255, 0.1); /* Background color change when pressed */
+        }
         .menu-icon { margin-right: 10px; }
         .menu-text { display: flex; flex-direction: column; }
         .menu-title, .menu-description { color: #FFFFFF; }
@@ -87,6 +97,20 @@
         #expandable-menu.expanded #overlay {
             opacity: 1; /* Make overlay fully opaque */
         }
+        /* Ripple effect styles */
+        .ripple {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.5s linear;
+        }
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -95,26 +119,29 @@
         <img src="https://github.com/brambleappmatus/resources/blob/main/menubutton.png?raw=true" alt="Menu" width="38" height="38">
     </button>
     <div id="expanded-menu">
-        <div class="menu-item">
+        <div class="menu-item" onclick="handleMenuItemClick(this)">
             <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/heart.png?raw=true" alt="POIs Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">POIs</div>
                 <div class="menu-description">View main points of interest</div>
             </div>
+            <div class="ripple"></div> <!-- Ripple effect -->
         </div>
-        <div class="menu-item">
+        <div class="menu-item" onclick="handleMenuItemClick(this)">
             <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/pin.png?raw=true" alt="Create Pin Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">Create Pin</div>
                 <div class="menu-description">Place a new pin on the map</div>
             </div>
+            <div class="ripple"></div> <!-- Ripple effect -->
         </div>
-        <div class="menu-item">
+        <div class="menu-item" onclick="handleMenuItemClick(this)">
             <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/personal.png?raw=true" alt="My Pins Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">My Pins</div>
                 <div class="menu-description">View my personal pins</div>
             </div>
+            <div class="ripple"></div> <!-- Ripple effect -->
         </div>
     </div>
     <div id="compass">
@@ -178,6 +205,18 @@
             // Set initial rotation of the compass
             document.getElementById('compass').style.transform = `rotate(${map.getBearing() + 180}deg)`; // Add 180 degrees
         });
+
+        function handleMenuItemClick(element) {
+            // Create and append a ripple element to the clicked menu item
+            var ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            element.appendChild(ripple);
+
+            // Remove the ripple element after the animation ends
+            ripple.addEventListener('animationend', function() {
+                ripple.remove();
+            });
+        }
     </script>
 </body>
 </html>
