@@ -21,16 +21,15 @@
         }
         #expandable-menu-button {
             position: absolute;
-            bottom: 70px;
-            right: 25px; /* Adjust right position */
+            bottom:55px;
+            right: 30px; /* Adjust right position */
             transform: translateX(50%); /* Center horizontally */
             cursor: pointer;
             background: none;
             border: none;
             padding: 0;
             z-index: 1;
-}
-
+        }
         #expanded-menu {
             width: 100%;
             display: none; /* Initially hidden */
@@ -50,16 +49,16 @@
             align-items: center;
             justify-content: start; /* Align items to the start of the flex container */
             padding: 10px 20px; /* Adjust padding as necessary */
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
             width: 100%; /* Ensure each item takes full width */
             box-sizing: border-box; /* Include padding in the element's total width and height */
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Less bright separating lines */
         }
         .menu-item:first-child { border-top: none; }
         .menu-icon { margin-right: 10px; }
         .menu-text { display: flex; flex-direction: column; }
         .menu-title, .menu-description { color: #FFFFFF; }
-        .menu-title { font-weight: bold; }
-        .menu-description { font-size: 12px; color: #CCCCCC; }
+        .menu-title { font-weight: bold; font-family: 'SF Pro', sans-serif; font-size: 14px; }
+        .menu-description { font-size: 12px; color: #7F7F7F; font-weight: 500; } /* Lighter font weight */
         #expandable-menu.expanded #expanded-menu { bottom: 0; } /* Slide the menu into view */
         #compass {
             position: absolute;
@@ -82,34 +81,36 @@
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1; /* Ensure it's below the menu */
             display: none; /* Initially hidden */
+            opacity: 0; /* Initially transparent */
+            transition: opacity 0.5s ease; /* Smooth transition */
         }
         #expandable-menu.expanded #overlay {
-            display: block; /* Display overlay when menu is expanded */
+            opacity: 1; /* Make overlay fully opaque */
         }
     </style>
 </head>
 <body>
     <div id='map'></div>
     <button id="expandable-menu-button">
-        <img src="https://github.com/brambleappmatus/resources/blob/main/menu.png?raw=true" alt="Menu" width="30" height="30">
+        <img src="https://github.com/brambleappmatus/resources/blob/main/menubutton.png?raw=true" alt="Menu" width="38" height="38">
     </button>
     <div id="expanded-menu">
         <div class="menu-item">
-            <img class="menu-icon" src="YOUR_ICON_URL_FOR_POIS" alt="POIs Icon" width="24" height="24">
+            <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/heart.png?raw=true" alt="POIs Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">POIs</div>
                 <div class="menu-description">View main points of interest</div>
             </div>
         </div>
         <div class="menu-item">
-            <img class="menu-icon" src="YOUR_ICON_URL_FOR_CREATE_PIN" alt="Create Pin Icon" width="24" height="24">
+            <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/pin.png?raw=true" alt="Create Pin Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">Create Pin</div>
                 <div class="menu-description">Place a new pin on the map</div>
             </div>
         </div>
         <div class="menu-item">
-            <img class="menu-icon" src="YOUR_ICON_URL_FOR_MY_PINS" alt="My Pins Icon" width="24" height="24">
+            <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/personal.png?raw=true" alt="My Pins Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">My Pins</div>
                 <div class="menu-description">View my personal pins</div>
@@ -141,14 +142,26 @@
         document.getElementById('expandable-menu-button').addEventListener('click', function() {
             var expandedMenu = document.getElementById('expanded-menu');
             expandedMenu.style.bottom = '0'; // Slide the menu into view
-            document.getElementById('overlay').style.display = 'block'; // Display overlay
+            
+            // Smoothly transition overlay opacity
+            document.getElementById('overlay').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('overlay').style.opacity = '1';
+            }, 50);
+            
             document.body.style.overflow = 'auto'; // Allow scrolling
         });
 
         function collapseMenu() {
             var expandedMenu = document.getElementById('expanded-menu');
             expandedMenu.style.bottom = '-300px'; // Slide the menu out of view
-            document.getElementById('overlay').style.display = 'none'; // Hide overlay
+            
+            // Smoothly transition overlay opacity
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'none'; // Hide overlay
+            }, 500);
+            
             document.body.style.overflow = 'hidden'; // Prevent scrolling
         }
 
@@ -159,12 +172,12 @@
         map.on('rotate', updateCompass);
 
         map.once('load', function() {
-    document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
-    document.querySelector('.mapboxgl-ctrl-attrib').remove();
+            document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
+            document.querySelector('.mapboxgl-ctrl-attrib').remove();
     
-    // Set initial rotation of the compass
-    document.getElementById('compass').style.transform = `rotate(${map.getBearing() + 180}deg)`; // Add 180 degrees
-});
+            // Set initial rotation of the compass
+            document.getElementById('compass').style.transform = `rotate(${map.getBearing() + 180}deg)`; // Add 180 degrees
+        });
     </script>
 </body>
 </html>
