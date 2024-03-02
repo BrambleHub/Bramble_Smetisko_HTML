@@ -59,6 +59,7 @@
             position: relative; /* Position for ripple effect */
             overflow: hidden; /* Hide overflowing ripple */
             transition: background-color 0.3s; /* Smooth transition for background color */
+            cursor: pointer; /* Add pointer cursor */
         }
         .menu-item:first-child { border-top: none; }
         .menu-item:active {
@@ -119,7 +120,7 @@
         <img src="https://github.com/brambleappmatus/resources/blob/main/menubutton.png?raw=true" alt="Menu" width="38" height="38">
     </button>
     <div id="expanded-menu">
-        <div class="menu-item" onclick="handleMenuItemClick(this)">
+        <div class="menu-item" onclick="handleMenuItemClick(this)" ontouchstart="handleMenuItemClick(this)">
             <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/heart.png?raw=true" alt="POIs Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">POIs</div>
@@ -127,7 +128,7 @@
             </div>
             <div class="ripple"></div> <!-- Ripple effect -->
         </div>
-        <div class="menu-item" onclick="handleMenuItemClick(this)">
+        <div class="menu-item" onclick="handleMenuItemClick(this)" ontouchstart="handleMenuItemClick(this)">
             <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/pin.png?raw=true" alt="Create Pin Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">Create Pin</div>
@@ -135,7 +136,7 @@
             </div>
             <div class="ripple"></div> <!-- Ripple effect -->
         </div>
-        <div class="menu-item" onclick="handleMenuItemClick(this)">
+        <div class="menu-item" onclick="handleMenuItemClick(this)" ontouchstart="handleMenuItemClick(this)">
             <img class="menu-icon" src="https://github.com/brambleappmatus/resources/blob/main/personal.png?raw=true" alt="My Pins Icon" width="24" height="24">
             <div class="menu-text">
                 <div class="menu-title">My Pins</div>
