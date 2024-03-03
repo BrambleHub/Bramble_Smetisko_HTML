@@ -89,23 +89,25 @@
                 renderingMode: '3d',
                 onAdd: function () {
                     const scale = 3.2;
-                    const options = {
-                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/ferriswheelgltf/untitled.gltf',
+                    
+                    // Define options for the first object
+                    const options1 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/ferris_wheel_from_poly_by_google/scene.gltf',
                         type: 'gltf',
-                        scale: { x: 40, y: 40, z: 40 },
+                        scale: { x: 8, y: 8, z: 8 },
                         units: 'meters',
                         rotation: { x: 90, y: -90, z: 0 }
                     };
 
                     // Load the first object
-                    tb.loadObj(options, (model) => {
-                        model.setCoords([18.002167, 48.872206]); // Set the coordinates
-                        model.setRotation({ x: 0, y: 0, z: 270 });
+                    tb.loadObj(options1, (model) => {
+                        model.setCoords([18.002199, 48.872014]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -80});
                         tb.add(model);
                     });
 
-                     // Load the third object (at the center of the map)
-                     const options3 = {
+                     // Define options for the second object 
+                     const options2 = {
                         obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/windmill/windmillgltf.gltf',
                         type: 'gltf',
                         scale: { x: 45, y: 45, z: 45 },
@@ -113,9 +115,25 @@
                         rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
                     };
 
+                    // Load the second object
+                    tb.loadObj(options2, (model) => {
+                        model.setCoords([18.001842, 48.869375]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: 10 }); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+                    
+                     // Define options for the third object 
+                     const options3 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/hot_air_balloon_-_low_poly/scene.gltf',
+                        type: 'gltf',
+                        scale: { x: 10, y: 10, z: 10 },
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
                     // Load the third object
                     tb.loadObj(options3, (model) => {
-                        model.setCoords([18.001842, 48.869375]); // Set the coordinates
+                        model.setCoords([17.999636, 48.867331, 300]); // Set the coordinates
                         model.setRotation({ x: 0, y: 0, z: 10 }); // Adjust rotation as needed
                         tb.add(model);
                     });
