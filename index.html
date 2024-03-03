@@ -52,7 +52,7 @@
             zoom: 16,
             bearing: -90.37,
             pitch: 54.53,
-            style: 'mapbox://styles/bramble22/clt5vn98s000901qs2fmqft7o',
+            style: 'mapbox://styles/bramble22/cltbqslsg00e401qs4mclcik1',
             minZoom: 15,
             maxZoom: 17,
             maxBounds: bounds
@@ -90,16 +90,33 @@
                 onAdd: function () {
                     const scale = 3.2;
                     const options = {
-                        obj: 'https://raw.githubusercontent.com/brambleappmatus/resources/main/ferris.gltf',
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/ferriswheelgltf/untitled.gltf',
                         type: 'gltf',
-                        scale: { x: scale, y: scale, z: 2.7 },
+                        scale: { x: 40, y: 40, z: 40 },
                         units: 'meters',
                         rotation: { x: 90, y: -90, z: 0 }
                     };
 
+                    // Load the first object
                     tb.loadObj(options, (model) => {
-                        model.setCoords([18.000031, 48.870137]); // Set the coordinates
-                        model.setRotation({ x: 0, y: 0, z: 241 });
+                        model.setCoords([18.002167, 48.872206]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: 270 });
+                        tb.add(model);
+                    });
+
+                     // Load the third object (at the center of the map)
+                     const options3 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/windmill/windmillgltf.gltf',
+                        type: 'gltf',
+                        scale: { x: 45, y: 45, z: 45 },
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the third object
+                    tb.loadObj(options3, (model) => {
+                        model.setCoords([18.001842, 48.869375]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: 10 }); // Adjust rotation as needed
                         tb.add(model);
                     });
                 },
