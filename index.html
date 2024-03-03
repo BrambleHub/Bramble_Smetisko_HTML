@@ -90,7 +90,7 @@
                 onAdd: function () {
                     const scale = 3.2;
                     
-                    // Define options for the first object
+                    // Define options for the first object ferris
                     const options1 = {
                         obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/ferris_wheel_from_poly_by_google/scene.gltf',
                         type: 'gltf',
@@ -106,7 +106,7 @@
                         tb.add(model);
                     });
 
-                     // Define options for the second object 
+                     // Define options for the second object windmill
                      const options2 = {
                         obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/windmill/windmillgltf.gltf',
                         type: 'gltf',
@@ -122,7 +122,7 @@
                         tb.add(model);
                     });
                     
-                     // Define options for the third object 
+                     // Define options for the third object balloon
                      const options3 = {
                         obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/hot_air_balloon_-_low_poly/scene.gltf',
                         type: 'gltf',
@@ -137,6 +137,161 @@
                         model.setRotation({ x: 0, y: 0, z: 10 }); // Adjust rotation as needed
                         tb.add(model);
                     });
+
+                     // Define options for the fourth object tent
+                     const options4 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/orangetent/orangetent.gltf',
+                        type: 'gltf',
+                        scale: { x: 20, y: 20, z: 20},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the second object
+                    tb.loadObj(options4, (model) => {
+                        model.setCoords([17.990455, 48.864471]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -40}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                          // Define options for the fifth object camper
+                          const options5 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/caravan/caravan.gltf',
+                        type: 'gltf',
+                        scale: { x: 0.5, y: 0.5, z: 0.5},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the fifth object
+                    tb.loadObj(options5, (model) => {
+                        model.setCoords([17.991076, 48.863214]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                        // Define options for the sixth object camper
+                        const options6 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/caravan/caravan.gltf',
+                        type: 'gltf',
+                        scale: { x: 0.5, y: 0.5, z: 0.5},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the sixth object
+                    tb.loadObj(options6, (model) => {
+                        model.setCoords([17.991467, 48.863514]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                           // Define options for the seventh object camper
+                           const options7 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/caravan/caravan.gltf',
+                        type: 'gltf',
+                        scale: { x: 0.5, y: 0.5, z: 0.5},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the seventh object
+                    tb.loadObj(options7, (model) => {
+                        model.setCoords([17.990643, 48.862914]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                    // Define options for the tent
+                    const options8 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/orangetent/orangetent.gltf',
+                        type: 'gltf',
+                        scale: { x: 20, y: 20, z: 20},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the seventh object
+                    tb.loadObj(options8, (model) => {
+                        model.setCoords([17.992154, 48.865513]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                     // Define options for the campfire
+                     const options9 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/campfire/caravan.gltf',
+                        type: 'gltf',
+                        scale: { x: 5, y: 5, z: 5},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the campfire
+                    tb.loadObj(options9, (model) => {
+                        model.setCoords([17.991538, 48.865074]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                    // Define options for the rock
+                    const options10 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/rock/rockgltf.gltf',
+                        type: 'gltf',
+                        scale: { x: 50, y: 70, z: 50},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the rock
+                    tb.loadObj(options10, (model) => {
+                        model.setCoords([17.998607, 48.872164]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                      // Define options for rock
+                      const options11 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/rockform/rockform.gltf',
+                        type: 'gltf',
+                        scale: { x: 5, y: 5, z: 5},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the rock
+                    tb.loadObj(options11, (model) => {
+                        model.setCoords([17.989361, 48.863926]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: -70}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+                         // Define options for the castle
+                         const options12 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/largerockform/rockform.gltf',
+                        type: 'gltf',
+                        scale: { x: 5, y: 5, z: 5},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the castle
+                    tb.loadObj(options12, (model) => {
+                        model.setCoords([17.985335, 48.860392]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 0, z: 0}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
+
+
+
+                    
+                    
+
+                    
+
+
+
                 },
 
                 render: function () {
