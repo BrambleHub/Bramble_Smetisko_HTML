@@ -52,7 +52,7 @@
             zoom: 16,
             bearing: -90.37,
             pitch: 54.53,
-            style: 'mapbox://styles/bramble22/cltdfj69p00kz01qnh5zc93oe',
+            style: 'mapbox://styles/bramble22/cltdhmqcd002u01nrh7xcghw4',
             minZoom: 15,
             maxZoom: 17,
             maxBounds: bounds
@@ -394,6 +394,23 @@
                         model.setRotation({ x: 0, y: 0, z: 40}); // Adjust rotation as needed
                         tb.add(model);
                     });
+
+                         // Define options for the airplane
+                         const options20 = {
+                        obj: 'https://raw.githubusercontent.com/brambleappmatus/threeboxobj/main/low_poly_airplane/scene.gltf',
+                        type: 'gltf',
+                        scale: { x: 70, y: 70, z: 70},
+                        units: 'meters',
+                        rotation: { x: 90, y: -90, z: 0 } // Adjust rotation as needed
+                    };
+
+                    // Load the airplane
+                    tb.loadObj(options20, (model) => {
+                        model.setCoords([18.004874, 48.868424,50]); // Set the coordinates
+                        model.setRotation({ x: 0, y: 20, z: 0}); // Adjust rotation as needed
+                        tb.add(model);
+                    });
+
 
 
 
