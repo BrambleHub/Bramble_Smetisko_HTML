@@ -49,7 +49,7 @@
         var map = new mapboxgl.Map({
             container: 'map',
             center: center,
-            zoom: 16,
+            zoom: 15.7,
             bearing: -90.37,
             pitch: 54.53,
             style: 'mapbox://styles/bramble22/cltdhmqcd002u01nrh7xcghw4',
@@ -73,6 +73,19 @@
             document.getElementById('compass').style.transform = `rotate(${map.getBearing() + 180}deg)`; // Add 180 degrees
         });
 
+          // Start smooth rotation
+          animateMapRotation();
+        
+    function animateMapRotation() {
+        const rotationSpeed = 0.1; // Adjust the speed of rotation here
+        function rotate() {
+            const currentBearing = map.getBearing();
+            map.rotateTo(currentBearing + rotationSpeed, { duration: 0, easing: () => 1 });
+            requestAnimationFrame(rotate);
+        }
+        rotate();
+    }
+
         // Initialize Threebox
         const tb = new Threebox(
             map,
@@ -81,6 +94,10 @@
                 defaultLights: true
             }
         );
+
+        
+
+        
 
         map.on('style.load', () => {
             map.addLayer({
@@ -428,6 +445,10 @@
                     tb.update();
                 }
             });
+
+
+            
+            
         });
     </script>
 </body>
